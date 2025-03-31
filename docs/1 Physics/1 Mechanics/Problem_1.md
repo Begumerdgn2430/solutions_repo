@@ -53,6 +53,8 @@ plt.tight_layout()
 plt.show()
 ```
 
+![alt text](<Screenshot 2025-03-31 at 22.09.39.png>)
+
 ---
 
 ##  Final
