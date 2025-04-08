@@ -135,7 +135,7 @@ $$
 
 This graph shows how the range changes with angle for $v_0 = 10, 20, 30 \, \text{m/s}$. All curves peak at $45^\circ$, confirming it as the optimal launch angle.
 
-![Range vs Angle for Different Velocities](plot_1_range_different_velocities.png)
+![alt text](Unknown-4.png)
 
 ---
 
@@ -143,7 +143,7 @@ This graph shows how the range changes with angle for $v_0 = 10, 20, 30 \, \text
 
 Here, $v_0 = 20 \, \text{m/s}$ and we compare projectile ranges on **Earth**, **Moon**, and **Mars**. The lower the gravity, the longer the projectile stays in the air, resulting in greater range.
 
-![Range vs Angle on Different Planets](plot_2_range_different_planets.png)
+![alt text](Unknown-3-1.png)
 
 ---
 
@@ -151,7 +151,9 @@ Here, $v_0 = 20 \, \text{m/s}$ and we compare projectile ranges on **Earth**, **
 
 This graph uses a fixed angle ($\theta = 45^\circ$) and velocity ($v_0 = 20\, \text{m/s}$), but launches the projectile from various heights ($h = 0, 5, 10\, \text{m}$). As expected, higher launch points result in longer range and higher peak.
 
-![Trajectory with Different Initial Heights](plot_3_trajectory_different_heights.png)
+
+![alt text](Unknown-2.png)
+
 
 ---
 
@@ -159,7 +161,7 @@ This graph uses a fixed angle ($\theta = 45^\circ$) and velocity ($v_0 = 20\, \t
 
 Here we show the paths of projectiles launched at the same speed ($v_0 = 20\, \text{m/s}$) but with different angles: $15^\circ$, $39^\circ$, $45^\circ$, $60^\circ$, and $75^\circ$. It visually demonstrates how lower angles have flatter paths and shorter airtime.
 
-![Trajectories at Different Angles](plot_4_trajectories_different_angles.png)
+![alt text](Unknown.png)
 
 ---
 
@@ -167,8 +169,7 @@ Here we show the paths of projectiles launched at the same speed ($v_0 = 20\, \t
 
 This comparison plot shows the difference in trajectories when air resistance is considered. While real drag modeling is complex, we simulate a simplified scenario showing that air resistance reduces both range and peak height.
 
-![Trajectory with and without Air Resistance](plot_5_air_resistance_comparison.png)
-
+![alt text](Unknown-1.png)
 ---
 
 ## 4. Insights and Applications
@@ -224,7 +225,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-![alt text](<Screenshot 2025-03-31 at 22.09.39.png>)
+
 
 ---
 
