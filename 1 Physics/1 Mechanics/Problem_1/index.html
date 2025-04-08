@@ -48,12 +48,6 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#the-basics-what-affects-the-range">The Basics: What Affects the Range?</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#simulate-it-with-python">Simulate It with Python</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#final">Final</a>
-</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
@@ -180,17 +174,126 @@
 <h1 id="problem-1">Problem 1</h1>
 <p>.</p>
 <hr/>
-<h2 id="the-basics-what-affects-the-range">The Basics: What Affects the Range?</h2>
-<p>When you launch a projectile at some angle <span class="arithmatex">\(\theta\)</span> with an initial speed <span class="arithmatex">\(v_0\)</span>, the horizontal distance it travels—called the <strong>range</strong> <span class="arithmatex">\(R\)</span>—depends on gravity and the launch angle. Here’s the equation that ties it all together:</p>
+<h1 id="investigating-the-range-as-a-function-of-the-angle-of-projection">🎯 Investigating the Range as a Function of the Angle of Projection</h1>
+<h1 id="derivation-of-the-general-solution-from-the-laws-of-motion">Derivation of the General Solution from the Laws of Motion</h1>
+<p>We begin with Newton's Second Law of Motion:</p>
+<div class="arithmatex">\[
+\vec{F} = m \vec{a}
+\]</div>
+<p>This implies that the net force acting on a body is equal to the mass of the body multiplied by its acceleration.</p>
+<hr/>
+<h2 id="1-motion-in-one-dimension">1. Motion in One Dimension</h2>
+<p>Consider motion along the x-axis with constant acceleration <span class="arithmatex">\(a\)</span>.</p>
+<p>From the definition of acceleration:</p>
+<div class="arithmatex">\[
+a = \frac{dv}{dt}
+\]</div>
+<p>Integrating both sides with respect to time:</p>
+<div class="arithmatex">\[
+\int a \, dt = \int \frac{dv}{dt} \, dt \Rightarrow at + C_1 = v(t)
+\]</div>
+<p>Letting <span class="arithmatex">\(v_0\)</span> be the initial velocity at <span class="arithmatex">\(t = 0\)</span>, we find <span class="arithmatex">\(C_1 = v_0\)</span>, so:</p>
+<div class="arithmatex">\[
+v(t) = v_0 + at
+\]</div>
+<p>Now, velocity is the derivative of position:</p>
+<div class="arithmatex">\[
+v = \frac{dx}{dt}
+\]</div>
+<p>Integrating again:</p>
+<div class="arithmatex">\[
+\int v \, dt = \int (v_0 + at) \, dt = v_0 t + \frac{1}{2} a t^2 + C_2
+\]</div>
+<p>Letting <span class="arithmatex">\(x_0\)</span> be the initial position at <span class="arithmatex">\(t = 0\)</span>, we find <span class="arithmatex">\(C_2 = x_0\)</span>, giving the position function:</p>
+<div class="arithmatex">\[
+x(t) = x_0 + v_0 t + \frac{1}{2} a t^2
+\]</div>
+<hr/>
+<h2 id="2-general-solution-in-two-dimensions">2. General Solution in Two Dimensions</h2>
+<p>We now extend the solution to two-dimensional motion with constant acceleration.</p>
+<p>Let <span class="arithmatex">\(\vec{r}(t) = (x(t), y(t))\)</span>, <span class="arithmatex">\(\vec{v}(t) = (v_x(t), v_y(t))\)</span>, and <span class="arithmatex">\(\vec{a} = (a_x, a_y)\)</span>.</p>
+<p>Using the same integration steps for each component:</p>
+<h3 id="velocity-components">Velocity components:</h3>
+<div class="arithmatex">\[
+v_x(t) = v_{0x} + a_x t
+\]</div>
+<div class="arithmatex">\[
+v_y(t) = v_{0y} + a_y t
+\]</div>
+<h3 id="position-components">Position components:</h3>
+<div class="arithmatex">\[
+x(t) = x_0 + v_{0x} t + \frac{1}{2} a_x t^2
+\]</div>
+<div class="arithmatex">\[
+y(t) = y_0 + v_{0y} t + \frac{1}{2} a_y t^2
+\]</div>
+<p>Thus, the general vector solution is:</p>
+<div class="arithmatex">\[
+\vec{r}(t) = \vec{r}_0 + \vec{v}_0 t + \frac{1}{2} \vec{a} t^2
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(\vec{r}_0 = (x_0, y_0)\)</span> is the initial position,</li>
+<li><span class="arithmatex">\(\vec{v}_0 = (v_{0x}, v_{0y})\)</span> is the initial velocity,</li>
+<li><span class="arithmatex">\(\vec{a} = (a_x, a_y)\)</span> is the constant acceleration.</li>
+</ul>
+<p>This equation describes the position of a particle under constant acceleration in two-dimensional space.</p>
+<hr/>
+<h2 id="2-theoretical-foundation">2. Theoretical Foundation</h2>
+<h3 id="velocity-components_1">🧮 Velocity Components:</h3>
+<ul>
+<li>Horizontal: <span class="arithmatex">\(v_{0x} = v_0 \cos(\theta)\)</span></li>
+<li>Vertical: <span class="arithmatex">\(v_{0y} = v_0 \sin(\theta)\)</span></li>
+</ul>
+<h3 id="time-of-flight">⏱️ Time of Flight:</h3>
+<div class="arithmatex">\[
+T = \frac{2 v_0 \sin(\theta)}{g}
+\]</div>
+<h3 id="range">📏 Range:</h3>
 <div class="arithmatex">\[
 R = \frac{v_0^2 \sin(2\theta)}{g}
 \]</div>
-<p>Where:
-- <span class="arithmatex">\(v_0\)</span> is how fast you're launching it (in meters per second)
-- <span class="arithmatex">\(\theta\)</span> is the angle you launch it at (in degrees)
-- <span class="arithmatex">\(g = 9.81 \, \text{m/s}^2\)</span> is gravity pulling it down</p>
-<p>Cool fact: The range is highest when <span class="arithmatex">\(\theta = 45^\circ\)</span>.</p>
+<ul>
+<li>Maximum range occurs at <span class="arithmatex">\(\theta = 45^\circ\)</span></li>
+<li>Doubling <span class="arithmatex">\(v_0\)</span> quadruples the range</li>
+</ul>
 <hr/>
+<h2 id="3-graphical-analysis">3. Graphical Analysis</h2>
+<h3 id="plot-1-range-vs-angle-for-different-velocities">📊 Plot 1: Range vs Angle for Different Velocities</h3>
+<p>This graph shows how the range changes with angle for <span class="arithmatex">\(v_0 = 10, 20, 30 \, \text{m/s}\)</span>. All curves peak at <span class="arithmatex">\(45^\circ\)</span>, confirming it as the optimal launch angle.</p>
+<p><img alt="Range vs Angle for Different Velocities" src="plot_1_range_different_velocities.png"/></p>
+<hr/>
+<h3 id="plot-2-range-vs-angle-on-different-planets">📊 Plot 2: Range vs Angle on Different Planets</h3>
+<p>Here, <span class="arithmatex">\(v_0 = 20 \, \text{m/s}\)</span> and we compare projectile ranges on <strong>Earth</strong>, <strong>Moon</strong>, and <strong>Mars</strong>. The lower the gravity, the longer the projectile stays in the air, resulting in greater range.</p>
+<p><img alt="Range vs Angle on Different Planets" src="plot_2_range_different_planets.png"/></p>
+<hr/>
+<h3 id="plot-3-trajectories-from-different-initial-heights">📊 Plot 3: Trajectories from Different Initial Heights</h3>
+<p>This graph uses a fixed angle (<span class="arithmatex">\(\theta = 45^\circ\)</span>) and velocity (<span class="arithmatex">\(v_0 = 20\, \text{m/s}\)</span>), but launches the projectile from various heights (<span class="arithmatex">\(h = 0, 5, 10\, \text{m}\)</span>). As expected, higher launch points result in longer range and higher peak.</p>
+<p><img alt="Trajectory with Different Initial Heights" src="plot_3_trajectory_different_heights.png"/></p>
+<hr/>
+<h3 id="plot-4-trajectories-at-multiple-angles">📊 Plot 4: Trajectories at Multiple Angles</h3>
+<p>Here we show the paths of projectiles launched at the same speed (<span class="arithmatex">\(v_0 = 20\, \text{m/s}\)</span>) but with different angles: <span class="arithmatex">\(15^\circ\)</span>, <span class="arithmatex">\(39^\circ\)</span>, <span class="arithmatex">\(45^\circ\)</span>, <span class="arithmatex">\(60^\circ\)</span>, and <span class="arithmatex">\(75^\circ\)</span>. It visually demonstrates how lower angles have flatter paths and shorter airtime.</p>
+<p><img alt="Trajectories at Different Angles" src="plot_4_trajectories_different_angles.png"/></p>
+<hr/>
+<h3 id="plot-5-with-vs-without-air-resistance">📊 Plot 5: With vs Without Air Resistance</h3>
+<p>This comparison plot shows the difference in trajectories when air resistance is considered. While real drag modeling is complex, we simulate a simplified scenario showing that air resistance reduces both range and peak height.</p>
+<p><img alt="Trajectory with and without Air Resistance" src="plot_5_air_resistance_comparison.png"/></p>
+<hr/>
+<h2 id="4-insights-and-applications">4. Insights and Applications</h2>
+<ul>
+<li><strong>45°</strong> is the optimal angle for range under ideal (no air) conditions.</li>
+<li><strong>Air resistance</strong> significantly shortens the range and reduces height.</li>
+<li><strong>Different planets</strong> yield different results due to varying gravity.</li>
+<li><strong>Initial height</strong> adds more airtime and therefore greater range.</li>
+</ul>
+<p>These concepts are important in:
+- Sports physics (kicking, throwing)
+- Military ballistics
+- Spacecraft launches
+- Engineering simulations</p>
+<hr/>
+<h2 id="5-conclusion">5. Conclusion</h2>
+<p>With physics equations and computational tools, we effectively analyzed how a projectile behaves under various scenarios. Graphical analysis helped confirm theoretical expectations and made the results more intuitive.</p>
 <h2 id="simulate-it-with-python">Simulate It with Python</h2>
 <p>Here’s some Python code that calculates the range for different angles and plots</p>
 <pre><code class="language-python">import numpy as np
