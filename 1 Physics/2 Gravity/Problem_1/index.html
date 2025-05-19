@@ -172,6 +172,72 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="orbital-period-and-orbital-radius">Orbital Period and Orbital Radius</h1>
+<h2 id="motivation">Motivation</h2>
+<p>The relationship between the square of the orbital period and the cube of the orbital radius, known as Kepler's Third Law, is a cornerstone of celestial mechanics. This simple yet profound relationship allows for the determination of planetary motions and has implications for understanding gravitational interactions on both local and cosmic scales. By analyzing this relationship, one can connect fundamental principles of gravity with real-world phenomena such as satellite orbits and planetary systems.</p>
+<h2 id="task">Task</h2>
+<h3 id="1-derive-the-relationship">1. Derive the Relationship</h3>
+<p>To derive the relationship between the square of the orbital period (<span class="arithmatex">\( T^2 \)</span>) and the cube of the orbital radius (<span class="arithmatex">\( r^3 \)</span>) for circular orbits, start with the balance of forces. The gravitational force on an orbiting body of mass <span class="arithmatex">\( m \)</span> around a central mass <span class="arithmatex">\( M \)</span> is:</p>
+<div class="arithmatex">\[ F = \frac{G M m}{r^2} \]</div>
+<p>The centripetal force required for circular motion at velocity <span class="arithmatex">\( v \)</span> is:</p>
+<div class="arithmatex">\[ F = m \frac{v^2}{r} \]</div>
+<p>Equating these forces, we get the following aligned equations:</p>
+<div class="arithmatex">\[ \begin{align}
+\frac{G M m}{r^2} &amp;= m \frac{v^2}{r} \\
+\frac{G M}{r} &amp;= v^2 \\
+v &amp;= \sqrt{\frac{G M}{r}}
+\end{align} \]</div>
+<p>The orbital period <span class="arithmatex">\( T \)</span> is the time to complete one orbit, so the circumference <span class="arithmatex">\( 2\pi r \)</span> divided by the velocity <span class="arithmatex">\( v \)</span>:</p>
+<div class="arithmatex">\[ \begin{align}
+T &amp;= \frac{2\pi r}{v} \\
+&amp;= \frac{2\pi r}{\sqrt{\frac{G M}{r}}} \\
+&amp;= 2\pi r \sqrt{\frac{r}{G M}} \\
+&amp;= 2\pi \sqrt{\frac{r^3}{G M}}
+\end{align} \]</div>
+<p>Square both sides to obtain:</p>
+<div class="arithmatex">\[ \begin{align}
+T^2 &amp;= \left(2\pi \sqrt{\frac{r^3}{G M}}\right)^2 \\
+&amp;= (2\pi)^2 \frac{r^3}{G M} \\
+&amp;= \frac{4\pi^2}{G M} r^3
+\end{align} \]</div>
+<p>Thus, <span class="arithmatex">\( T^2 \propto r^3 \)</span>, and plotting <span class="arithmatex">\( T^2 \)</span> vs. <span class="arithmatex">\( r^3 \)</span> should yield a straight line with slope <span class="arithmatex">\( \frac{4\pi^2}{G M} \)</span>. Note that ChatGPT's mention of an error in showing the line as straight is incorrect; the derivation confirms the relationship is linear.</p>
+<h3 id="2-discuss-the-implications">2. Discuss the Implications</h3>
+<p>Kepler's Third Law allows us to calculate planetary masses and distances:
+- <strong>Mass of the central body</strong>: By measuring <span class="arithmatex">\( T \)</span> and <span class="arithmatex">\( r \)</span> of an orbiting body (e.g., a moon or planet), we can determine <span class="arithmatex">\( M \)</span> of the central body (e.g., a planet or star).
+- <strong>Orbital radius</strong>: If <span class="arithmatex">\( M \)</span> is known, we can determine <span class="arithmatex">\( r \)</span> from <span class="arithmatex">\( T \)</span>, useful for satellites or exoplanets.
+- <strong>Period prediction</strong>: Knowing <span class="arithmatex">\( r \)</span>, we can predict <span class="arithmatex">\( T \)</span>, aiding in mission planning for spacecraft.</p>
+<h3 id="3-analyze-real-world-examples">3. Analyze Real-World Examples</h3>
+<p>Using data from Mercury, Venus, Earth, and Mars, we verify the relationship. The chart below plots <span class="arithmatex">\( T^2 \)</span> vs. <span class="arithmatex">\( r^3 \)</span> for these planets, showing a straight line as expected:</p>
+<p><img alt="alt text" src="../image.png"/></p>
+<p>The data points are:
+- Mercury: <span class="arithmatex">\( T = 7.601 \times 10^6 \)</span> s, <span class="arithmatex">\( r = 5.791 \times 10^{10} \)</span> m, <span class="arithmatex">\( T^2 = 5.777 \times 10^{13} \)</span> s², <span class="arithmatex">\( r^3 = 1.942 \times 10^{32} \)</span> m³
+- Venus: <span class="arithmatex">\( T = 1.941 \times 10^7 \)</span> s, <span class="arithmatex">\( r = 1.082 \times 10^{11} \)</span> m, <span class="arithmatex">\( T^2 = 3.767 \times 10^{14} \)</span> s², <span class="arithmatex">\( r^3 = 1.266 \times 10^{33} \)</span> m³
+- Earth: <span class="arithmatex">\( T = 3.156 \times 10^7 \)</span> s, <span class="arithmatex">\( r = 1.496 \times 10^{11} \)</span> m, <span class="arithmatex">\( T^2 = 9.960 \times 10^{14} \)</span> s², <span class="arithmatex">\( r^3 = 3.347 \times 10^{33} \)</span> m³
+- Mars: <span class="arithmatex">\( T = 5.936 \times 10^7 \)</span> s, <span class="arithmatex">\( r = 2.279 \times 10^{11} \)</span> m, <span class="arithmatex">\( T^2 = 3.524 \times 10^{15} \)</span> s², <span class="arithmatex">\( r^3 = 1.184 \times 10^{34} \)</span> m³</p>
+<p>The linear relationship is evident, confirming Kepler's Third Law in the Solar System.</p>
+<h3 id="4-implement-a-computational-model">4. Implement a Computational Model</h3>
+<p>A computational model can simulate circular orbits by using Kepler's Third Law. Below, we calculate the masses of the Sun and Earth using real data.</p>
+<h4 id="mass-of-the-sun">Mass of the Sun</h4>
+<p>Using Earth's orbit around the Sun (<span class="arithmatex">\( T = 3.156 \times 10^7 \)</span> s, <span class="arithmatex">\( r = 1.496 \times 10^{11} \)</span> m):</p>
+<div class="arithmatex">\[ \begin{align}
+M_{\text{Sun}} &amp;= \frac{4\pi^2 r^3}{G T^2} \\
+&amp;= \frac{4\pi^2 (1.496 \times 10^{11})^3}{(6.67430 \times 10^{-11}) (3.156 \times 10^7)^2} \\
+&amp;\approx 1.982 \times 10^{30} \text{ kg}
+\end{align} \]</div>
+<h4 id="mass-of-the-earth">Mass of the Earth</h4>
+<p>Using the Moon's orbit around Earth (<span class="arithmatex">\( T = 2.360 \times 10^6 \)</span> s, <span class="arithmatex">\( r = 3.844 \times 10^8 \)</span> m):</p>
+<div class="arithmatex">\[ \begin{align}
+M_{\text{Earth}} &amp;= \frac{4\pi^2 r^3}{G T^2} \\
+&amp;= \frac{4\pi^2 (3.844 \times 10^8)^3}{(6.67430 \times 10^{-11}) (2.360 \times 10^6)^2} \\
+&amp;\approx 6.031 \times 10^{24} \text{ kg}
+\end{align} \]</div>
+<h2 id="deliverables">Deliverables</h2>
+<ol>
+<li>A Markdown document with Python script or notebook implementing the simulations.</li>
+<li>A detailed explanation of the subjects.</li>
+<li>Graphical representations of circular orbits and the relationship between orbital period and radius.</li>
+<li>A discussion on how this relationship extends to elliptical orbits and other celestial bodies.</li>
+</ol>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
