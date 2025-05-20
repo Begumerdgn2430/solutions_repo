@@ -52,9 +52,9 @@ Adding forcing produces new parameters, such as the amplitude and frequency of t
 5. Phase portraits, Poincaré sections, and bifurcation diagrams to analyze transitions to complex dynamics.
 
 ## Hints and Resources
-- For small angles, approximate $ \sin \theta \approx \theta $ to simplify the differential equation.
+- For small angles, approximate $\sin \theta \approx \theta$ to simplify the differential equation.
 - Employ numerical techniques (e.g., Runge-Kutta methods) for exploring the dynamics beyond the small-angle approximation.
 - Relate the forced damped pendulum to analogous systems in other fields, such as electrical circuits (driven RLC circuits) or biomechanics (human gait).
 - Utilize software tools like Python for simulations and visualizations.
 
-This task bridges theoretical analysis with computational exploration, fostering a deeper understanding of forced and damped oscillatory phenomena and their implications in both physics and engineering.
+This task bridges theoretical analysis with computational exploration, fostering a deeper understanding of forced and damped oscillatory phenomena and their implications in both physics and engineering. 
