@@ -88,7 +88,7 @@ The data points are:
 
 The linear relationship is evident, confirming Kepler's Third Law in the Solar System.
 
-![alt text](image-2.png)
+![alt text](image-9.png)
 
 ### 4. Implement a Computational Model
 A computational model can simulate circular orbits by using Kepler's Third Law. Below, we calculate the masses of the Sun and Earth using real data.
