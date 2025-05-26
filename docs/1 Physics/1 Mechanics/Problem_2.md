@@ -1,13 +1,14 @@
 # Problem 2
 
 
-# Example
+
 
 Pendulum in physcics is a classic example of a system that exhibits periodic motion. A pendulum consists of a mass (the bob) attached to a string or rod that swings back and forth under the influence of gravity. The motion of the pendulum can be described by its period, which is the time it takes to complete one full swing, and its amplitude, which is the maximum distance from the equilibrium position.
 
 # Colab
 
 [Visit my colab page]https://colab.research.google.com/drive/1tXrcn0eyufzG0LCLXhvXq7w2YqxVh6Nt?usp=sharing
+
 
 # Pendulum Example
 
