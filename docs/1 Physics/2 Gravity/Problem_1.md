@@ -41,7 +41,7 @@ T^2 &= \left(2\pi \sqrt{\frac{r^3}{G M}}\right)^2 \\
 &= \frac{4\pi^2}{G M} r^3
 \end{align} $$
 
-Thus, \( T^2 \propto r^3 \), and plotting \( T^2 \) vs. \( r^3 \) should yield a straight line with slope \( \frac{4\pi^2}{G M} \). Note that ChatGPT's mention of an error in showing the line as straight is incorrect; the derivation confirms the relationship is linear.
+Thus, \(T^2 \propto r^3\), and plotting \( T^2 \) vs. \( r^3 \) should yield a straight line with slope \( \frac{4\pi^2}{G M} \). Note that ChatGPT's mention of an error in showing the line as straight is incorrect; the derivation confirms the relationship is linear.
 
 ### 2. Discuss the Implications
 Kepler's Third Law allows us to calculate planetary masses and distances:
@@ -51,8 +51,34 @@ Kepler's Third Law allows us to calculate planetary masses and distances:
 
 ### 3. Analyze Real-World Examples
 Using data from Mercury, Venus, Earth, and Mars, we verify the relationship. The chart below plots \( T^2 \) vs. \( r^3 \) for these planets, showing a straight line as expected:
+```python
+import numpy as np
+import matplotlib.pyplot as plt
 
-![alt text](image.png)
+# Gravitational constant
+G = 6.67430e-11 # m^3 kg^-1 s^-2
+
+# Hypothetical central mass (e.g., mass of the Sun)
+M = 1.989e30 # kg
+
+# Generate a range of orbital radii (in meters)
+r = np.linspace(1e10, 5e12, 100)
+
+# Calculate the period squared (T^2) using Kepler's Third Law: T^2 = (4*pi^2 / GM) * r^3
+T_squared = (4 * np.pi**2 / (G * M)) * r**3
+
+# Plot T^2 vs. r^3
+plt.figure(figsize=(10, 6))
+plt.plot(r**3, T_squared)
+plt.xlabel('Orbital Radius Cubed (r³)')
+plt.ylabel('Period Squared (T²)')
+plt.title('Kepler\'s Third Law: T² vs. r³')
+plt.grid(True)
+plt.show()
+```
+![alt text](image-1.png)
+
+
 
 The data points are:
 - Mercury: \( T = 7.601 \times 10^6 \) s, \( r = 5.791 \times 10^{10} \) m, \( T^2 = 5.777 \times 10^{13} \) s², \( r^3 = 1.942 \times 10^{32} \) m³
@@ -61,6 +87,8 @@ The data points are:
 - Mars: \( T = 5.936 \times 10^7 \) s, \( r = 2.279 \times 10^{11} \) m, \( T^2 = 3.524 \times 10^{15} \) s², \( r^3 = 1.184 \times 10^{34} \) m³
 
 The linear relationship is evident, confirming Kepler's Third Law in the Solar System.
+
+![alt text](image-2.png)
 
 ### 4. Implement a Computational Model
 A computational model can simulate circular orbits by using Kepler's Third Law. Below, we calculate the masses of the Sun and Earth using real data.
@@ -83,6 +111,7 @@ M_{\text{Earth}} &= \frac{4\pi^2 r^3}{G T^2} \\
 &\approx 6.031 \times 10^{24} \text{ kg}
 \end{align} $$
 
+![alt text](image-3.png)
 
 
 ## Deliverables
@@ -90,4 +119,6 @@ M_{\text{Earth}} &= \frac{4\pi^2 r^3}{G T^2} \\
 2. A detailed explanation of the subjects.
 3. Graphical representations of circular orbits and the relationship between orbital period and radius.
 4. A discussion on how this relationship extends to elliptical orbits and other celestial bodies.
-
+ 
+ # Colab #
+ https://colab.research.google.com/drive/108W4MtM57JQXHD-ywrARegzdAVFtI6an?usp=sharing
