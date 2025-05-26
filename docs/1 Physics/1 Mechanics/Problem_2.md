@@ -7,7 +7,7 @@ Pendulum in physcics is a classic example of a system that exhibits periodic mot
 
 # Colab
 
-[Visit my colab page] https://colab.research.google.com/drive/1tXrcn0eyufzG0LCLXhvXq7w2YqxVh6Nt?usp=sharing
+[Visit my colab page]https://colab.research.google.com/drive/1tXrcn0eyufzG0LCLXhvXq7w2YqxVh6Nt?usp=sharing
 
 # Pendulum Example
 
