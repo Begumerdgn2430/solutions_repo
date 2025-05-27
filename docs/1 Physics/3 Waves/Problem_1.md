@@ -120,6 +120,7 @@ fig.update_layout(title='Interference Pattern (Two Sources - 3D)',
 ```
 ![alt text](image-1.png)
 
-
+![alt text](Unknown-1.gif)
 # Colab #
 [Colab Link](https://colab.research.google.com/drive/10fIBZ2KBNwB4ymA9QLGwyIqgCLgBWuNd?usp=sharing)
+
