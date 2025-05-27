@@ -172,40 +172,116 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
-<p>import numpy as np
+<h1 id="wave-interference-solution">Wave Interference Solution</h1>
+<h2 id="step-1-select-a-regular-polygon">Step 1: Select a Regular Polygon</h2>
+<p>Let's choose a square as the regular polygon, with vertices at coordinates <span class="arithmatex">\((0,0)\)</span>, <span class="arithmatex">\((1,0)\)</span>, <span class="arithmatex">\((1,1)\)</span>, and <span class="arithmatex">\((0,1)\)</span>. Each vertex will have a point source emitting waves.</p>
+<h2 id="step-2-position-the-sources">Step 2: Position the Sources</h2>
+<p>The sources are placed at the vertices of the square:
+- Source 1: <span class="arithmatex">\((0,0)\)</span>
+- Source 2: <span class="arithmatex">\((1,0)\)</span>
+- Source 3: <span class="arithmatex">\((1,1)\)</span>
+- Source 4: <span class="arithmatex">\((0,1)\)</span></p>
+<h2 id="step-3-wave-equations">Step 3: Wave Equations</h2>
+<p>Each source emits a wave with amplitude <span class="arithmatex">\(A\)</span>, wavelength <span class="arithmatex">\(\lambda\)</span>, frequency <span class="arithmatex">\(f\)</span>, wave number <span class="arithmatex">\(k = \frac{2\pi}{\lambda}\)</span>, and angular frequency <span class="arithmatex">\(\omega = 2\pi f\)</span>. The wave from a source at <span class="arithmatex">\((x_i, y_i)\)</span> to a point <span class="arithmatex">\((x, y)\)</span> at time <span class="arithmatex">\(t\)</span> is given by:</p>
+<ul>
+<li>Distance from source to point: <span class="arithmatex">\(r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2}\)</span></li>
+<li>Wave equation: <span class="arithmatex">\(\eta_i(x, y, t) = \frac{A}{\sqrt{r_i}} \cos(k r_i - \omega t + \phi)\)</span></li>
+</ul>
+<p>Since all sources have the same phase, we set <span class="arithmatex">\(\phi = 0\)</span>. Thus, for each source:
+- Source 1 at <span class="arithmatex">\((0,0)\)</span>: <span class="arithmatex">\(r_1 = \sqrt{x^2 + y^2}\)</span>, <span class="arithmatex">\(\eta_1(x, y, t) = \frac{A}{\sqrt{r_1}} \cos(k r_1 - \omega t)\)</span>
+- Source 2 at <span class="arithmatex">\((1,0)\)</span>: <span class="arithmatex">\(r_2 = \sqrt{(x-1)^2 + y^2}\)</span>, <span class="arithmatex">\(\eta_2(x, y, t) = \frac{A}{\sqrt{r_2}} \cos(k r_2 - \omega t)\)</span>
+- Source 3 at <span class="arithmatex">\((1,1)\)</span>: <span class="arithmatex">\(r_3 = \sqrt{(x-1)^2 + (y-1)^2}\)</span>, <span class="arithmatex">\(\eta_3(x, y, t) = \frac{A}{\sqrt{r_3}} \cos(k r_3 - \omega t)\)</span>
+- Source 4 at <span class="arithmatex">\((0,1)\)</span>: <span class="arithmatex">\(r_4 = \sqrt{x^2 + (y-1)^2}\)</span>, <span class="arithmatex">\(\eta_4(x, y, t) = \frac{A}{\sqrt{r_4}} \cos(k r_4 - \omega t)\)</span></p>
+<h2 id="step-4-superposition-of-waves">Step 4: Superposition of Waves</h2>
+<p>The total displacement at point <span class="arithmatex">\((x, y)\)</span> and time <span class="arithmatex">\(t\)</span> is the sum of the waves from all sources:</p>
+<p><span class="arithmatex">\(\eta_{\text{sum}}(x, y, t) = \eta_1(x, y, t) + \eta_2(x, y, t) + \eta_3(x, y, t) + \eta_4(x, y, t)\)</span></p>
+<p>So,</p>
+<p><span class="arithmatex">\(\eta_{\text{sum}}(x, y, t) = \frac{A}{\sqrt{r_1}} \cos(k r_1 - \omega t) + \frac{A}{\sqrt{r_2}} \cos(k r_2 - \omega t) + \frac{A}{\sqrt{r_3}} \cos(k r_3 - \omega t) + \frac{A}{\sqrt{r_4}} \cos(k r_4 - \omega t)\)</span></p>
+<h2 id="step-5-analyze-interference-patterns">Step 5: Analyze Interference Patterns</h2>
+<ul>
+<li><strong>Constructive Interference</strong>: Occurs when the waves are in phase, i.e., the path difference <span class="arithmatex">\(r_i - r_j\)</span> is a multiple of <span class="arithmatex">\(\lambda\)</span>. For example, at the center of the square <span class="arithmatex">\((0.5, 0.5)\)</span>, calculate <span class="arithmatex">\(r_i\)</span> from each source to check for constructive interference.</li>
+<li><strong>Destructive Interference</strong>: Occurs when the waves are out of phase by <span class="arithmatex">\(\pi\)</span>, i.e., the path difference is an odd multiple of <span class="arithmatex">\(\frac{\lambda}{2}\)</span>. This can be observed along lines where waves cancel out.</li>
+</ul>
+<h2 id="step-6-visualization">Step 6: Visualization</h2>
+<p>To visualize the interference patterns, use Python with Matplotlib to plot the total displacement <span class="arithmatex">\(\eta_{\text{sum}}(x, y, t)\)</span> over a 2D grid at a fixed time <span class="arithmatex">\(t\)</span>. A heatmap or contour plot can illustrate regions of constructive and destructive interference effectively.</p>
+<pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
-from math import sqrt, cos, pi</p>
-<h1 id="parameters">Parameters</h1>
-<p>A = 1.0  # Amplitude
-lambda_ = 1.0  # Wavelength
-k = 2 * pi / lambda_  # Wave number
-f = 1.0  # Frequency
-omega = 2 * pi * f  # Angular frequency
-phi = 0.0  # Initial phase
-t = 0.0  # Time</p>
-<h1 id="define-a-square-polygon-vertices-example">Define a square polygon vertices (example)</h1>
-<p>vertices = [(0, 0), (1, 0), (1, 1), (0, 1)]
-N = len(vertices)  # Number of sources</p>
-<h1 id="create-grid">Create grid</h1>
-<p>x = np.linspace(-2, 2, 100)
-y = np.linspace(-2, 2, 100)
+import plotly.graph_objects as go
+from matplotlib import animation
+from IPython.display import HTML
+def create_wave(x, y, source_x, source_y, amplitude, wavelength, time, speed):
+  """Creates a wave from a single source."""
+  distance = np.sqrt((x - source_x)**2 + (y - source_y)**2)
+  wave = amplitude * np.sin(2 * np.pi * (distance / wavelength - time * speed / wavelength))
+  return wave
+
+# Define parameters
+grid_size = 100
+x = np.linspace(-5, 5, grid_size)
+y = np.linspace(-5, 5, grid_size)
 X, Y = np.meshgrid(x, y)
-eta_sum = np.zeros_like(X, dtype=float)</p>
-<h1 id="superposition-of-waves">Superposition of waves</h1>
-<p>for x0, y0 in vertices:
-    r = np.sqrt((X - x0)<strong>2 + (Y - y0)</strong>2)
-    eta = A / np.sqrt(r + 1e-10) * cos(k * r - omega * t + phi)  # Avoid division by zero
-    eta_sum += eta</p>
-<h1 id="plot">Plot</h1>
-<p>plt.figure(figsize=(8, 6))
-plt.contourf(X, Y, eta_sum, levels=50, cmap='viridis')
-plt.colorbar(label='Displacement')
-plt.title('Interference Patterns on Water Surface')
+
+source_x, source_y = 0, 0
+amplitude = 1
+wavelength = 1
+speed = 1
+time = 0
+
+# Generate wave data
+wave_data = create_wave(X, Y, source_x, source_y, amplitude, wavelength, time, speed)
+
+# Plotting (Heatmap)
+plt.figure(figsize=(6, 6))
+plt.imshow(wave_data, extent=[-5, 5, -5, 5], origin='lower', cmap='viridis')
+plt.title('Wave from One Source (Heatmap)')
 plt.xlabel('X')
 plt.ylabel('Y')
-plt.scatter([v[0] for v in vertices], [v[1] for v in vertices], color='red', label='Sources')
-plt.legend()
-plt.savefig('interference_pattern.png')</p>
+plt.colorbar(label='Amplitude')
+plt.show()
+
+# Plotting (3D)
+fig = go.Figure(data=[go.Surface(z=wave_data, x=x, y=y, colorscale='viridis')])
+fig.update_layout(title='Wave from One Source (3D)',
+                  scene = dict(
+                      xaxis_title='X',
+                      yaxis_title='Y',
+                      zaxis_title='Amplitude'))
+fig.show()
+</code></pre>
+<p><img alt="alt text" src="../image.png"/></p>
+<pre><code class="language-python">def create_interference(x, y, sources, amplitude, wavelength, time, speed):
+  """Creates interference pattern from multiple sources."""
+  total_wave = np.zeros_like(x)
+  for source_x, source_y in sources:
+    total_wave += create_wave(x, y, source_x, source_y, amplitude, wavelength, time, speed)
+  return total_wave
+
+# Define parameters for two sources
+sources_two = [( -2, 0), (2, 0)] # Source positions
+time = 0
+
+# Generate interference data
+interference_data_two = create_interference(X, Y, sources_two, amplitude, wavelength, time, speed)
+
+# Plotting (Heatmap)
+plt.figure(figsize=(6, 6))
+plt.imshow(interference_data_two, extent=[-5, 5, -5, 5], origin='lower', cmap='viridis')
+plt.title('Interference Pattern (Two Sources - Heatmap)')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.colorbar(label='Amplitude')
+plt.show()
+
+# Plotting (3D)
+fig = go.Figure(data=[go.Surface(z=interference_data_two, x=x, y=y, colorscale='viridis')])
+fig.update_layout(title='Interference Pattern (Two Sources - 3D)',
+                  scene = dict(
+                      xaxis_title='X',
+                      yaxis_title='Y',
+</code></pre>
+<p><img alt="alt text" src="../image-1.png"/></p>
+<h1 id="colab">Colab</h1>
+<p><a href="https://colab.research.google.com/drive/10fIBZ2KBNwB4ymA9QLGwyIqgCLgBWuNd?usp=sharing">Colab Link</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
