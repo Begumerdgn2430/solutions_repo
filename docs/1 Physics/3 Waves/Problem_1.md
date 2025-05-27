@@ -87,6 +87,8 @@ fig.show()
 ```
 ![alt text](image.png)
 
+ ![alt text](Unknown-2.gif)
+ 
 ```python
 def create_interference(x, y, sources, amplitude, wavelength, time, speed):
   """Creates interference pattern from multiple sources."""
