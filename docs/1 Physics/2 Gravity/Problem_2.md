@@ -100,4 +100,4 @@ plt.grid(True)
 plt.show()
 ```
 # Colab #
-https://colab.research.google.com/drive/17pPFY4rrF_9EhONsXk9cY9g4G8dPIlM8?usp=sharing
+[Colab Link](https://colab.research.google.com/drive/17pPFY4rrF_9EhONsXk9cY9g4G8dPIlM8?usp=sharing)
