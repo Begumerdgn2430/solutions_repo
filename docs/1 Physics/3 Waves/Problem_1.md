@@ -88,7 +88,7 @@ fig.show()
 ![alt text](image.png)
 
  ![alt text](Unknown-2.gif)
- 
+
 ```python
 def create_interference(x, y, sources, amplitude, wavelength, time, speed):
   """Creates interference pattern from multiple sources."""
@@ -123,6 +123,10 @@ fig.update_layout(title='Interference Pattern (Two Sources - 3D)',
 ![alt text](image-1.png)
 
 ![alt text](Unknown-1.gif)
+
+![alt text](<Screenshot 2025-05-27 at 17.09.18.png>)
+
 # Colab #
 [Colab Link](https://colab.research.google.com/drive/10fIBZ2KBNwB4ymA9QLGwyIqgCLgBWuNd?usp=sharing)
+
 
