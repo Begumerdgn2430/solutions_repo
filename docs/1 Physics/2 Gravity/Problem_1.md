@@ -121,4 +121,4 @@ M_{\text{Earth}} &= \frac{4\pi^2 r^3}{G T^2} \\
 4. A discussion on how this relationship extends to elliptical orbits and other celestial bodies.
  
  # Colab #
- https://colab.research.google.com/drive/108W4MtM57JQXHD-ywrARegzdAVFtI6an?usp=sharing
+ [Colab Link](https://colab.research.google.com/drive/1LGlothuRDTSTOxQwUj2SFyvsUIuHy-RA?usp=sharing)
