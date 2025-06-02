@@ -55,28 +55,43 @@ Using data from Mercury, Venus, Earth, and Mars, we verify the relationship. The
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Gravitational constant
-G = 6.67430e-11 # m^3 kg^-1 s^-2
+# Define data for the inner planets (average orbital radius in AU, orbital period in Earth years)
+planets = {
+    'Mercury': {'r': 0.387, 'T': 0.241},
+    'Venus': {'r': 0.723, 'T': 0.615},
+    'Earth': {'r': 1.000, 'T': 1.000},
+    'Mars': {'r': 1.524, 'T': 1.881}
+}
 
-# Hypothetical central mass (e.g., mass of the Sun)
-M = 1.989e30 # kg
+# Calculate r^3 and T^2 for each planet
+r_cubed = [p['r']**3 for p in planets.values()]
+T_squared = [p['T']**2 for p in planets.values()]
+planet_names = list(planets.keys())
 
-# Generate a range of orbital radii (in meters)
-r = np.linspace(1e10, 5e12, 100)
+# Plot T^2 vs r^3 for the planets
+plt.figure(figsize=(8, 6))
+plt.scatter(r_cubed, T_squared, color='red', label='Inner Planets')
 
-# Calculate the period squared (T^2) using Kepler's Third Law: T^2 = (4*pi^2 / GM) * r^3
-T_squared = (4 * np.pi**2 / (G * M)) * r**3
+# Add labels to the data points
+for i, name in enumerate(planet_names):
+    plt.annotate(name, (r_cubed[i], T_squared[i]), textcoords="offset points", xytext=(0,10), ha='center')
 
-# Plot T^2 vs. r^3
-plt.figure(figsize=(10, 6))
-plt.plot(r**3, T_squared)
-plt.xlabel('Orbital Radius Cubed (r³)')
-plt.ylabel('Period Squared (T²)')
-plt.title('Kepler\'s Third Law: T² vs. r³')
+# Define a range of r values for the theoretical line
+r_theoretical = np.linspace(min(r_cubed)**(1/3) * 0.8, max(r_cubed)**(1/3) * 1.2, 100) # Extend range slightly
+T_squared_theoretical = r_theoretical**3 # In AU^3 and years^2, the constant is 1
+
+# Plot the theoretical line
+plt.plot(r_theoretical**3, T_squared_theoretical, color='blue', linestyle='--', label='Kepler\'s Law (T^2 = r^3)')
+
+
+plt.xlabel('r^3 (AU^3)')
+plt.ylabel('T^2 (years^2)')
+plt.title('T^2 vs r^3 for Inner Planets')
+plt.legend()
 plt.grid(True)
 plt.show()
 ```
-![alt text](image-1.png)
+![alt text](image-10.png)
 
 
 
@@ -88,7 +103,7 @@ The data points are:
 
 The linear relationship is evident, confirming Kepler's Third Law in the Solar System.
 
-![alt text](image-9.png)
+
 
 ### 4. Implement a Computational Model
 A computational model can simulate circular orbits by using Kepler's Third Law. Below, we calculate the masses of the Sun and Earth using real data.
