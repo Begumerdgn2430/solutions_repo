@@ -102,4 +102,8 @@ v0 = np.array([0, 1e3, 0])   # Perpendicular velocity
 state0 = np.concatenate((r0, v0))
 sol3 = solve_ivp(lorentz_force, t_span, state0, t_eval=t_eval, args=(E, B))
 plot_trajectory(sol3, title='E × B Drift')
+```
 
+***Colab***
+
+https://colab.research.google.com/drive/1VRe8eJ75J-PFvNOQj2IY8NAdAahzKjw7?usp=sharing
