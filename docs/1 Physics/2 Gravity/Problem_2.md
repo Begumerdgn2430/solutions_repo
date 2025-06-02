@@ -30,6 +30,15 @@ Parameters affecting these velocities include the mass of the celestial body ($M
 
 ![alt text](image-4.png)
 ![alt text](image-5.png)
+
+***Cosmic Velocities for Earth:***
+
+First Cosmic Velocity (v1): 7.91 km/s (Orbital velocity just above surface)
+
+Second Cosmic Velocity (v2): 11.19 km/s (Escape velocity from Earth's surface)
+
+Escape Velocity from Sun at Earth's orbit: 42.13 km/s
+
 ### 3. Calculations and Visualization
 
 Let’s calculate these velocities for Earth, Mars, and Jupiter using the following data:
@@ -40,6 +49,7 @@ Let’s calculate these velocities for Earth, Mars, and Jupiter using the follow
 - **Sun** (for $v_3$ from Earth’s orbit): $M_{\text{Sun}} = 1.989 \times 10^{30} \, \text{kg}$, $r = 1.496 \times 10^{11} \, \text{m}$ (1 AU).
 
 ![alt text](image-6.png)
+
 
 #### Python Script for Calculations
 
