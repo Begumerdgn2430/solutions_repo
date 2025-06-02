@@ -172,6 +172,91 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="electromagnetism-lorentz-force-simulations">Electromagnetism: Lorentz Force Simulations</h1>
+<h2 id="introduction">Introduction</h2>
+<p>The Lorentz force describes the force exerted on a charged particle moving through electric and magnetic fields. It is given by:</p>
+<div class="arithmatex">\[
+\vec{F} = q (\vec{E} + \vec{v} \times \vec{B})
+\]</div>
+<p>Where:
+- <span class="arithmatex">\( \vec{F} \)</span> is the force on the particle (in newtons, N),
+- <span class="arithmatex">\( q \)</span> is the electric charge of the particle (in coulombs, C),
+- <span class="arithmatex">\( \vec{E} \)</span> is the electric field (in volts per meter, V/m),
+- <span class="arithmatex">\( \vec{v} \)</span> is the velocity of the particle (in meters per second, m/s),
+- <span class="arithmatex">\( \vec{B} \)</span> is the magnetic field (in teslas, T).</p>
+<p>This force is fundamental in understanding the motion of charged particles in electromagnetic fields, leading to various trajectory patterns depending on the initial conditions and field configurations.</p>
+<hr/>
+<h2 id="simulation-setup">Simulation Setup</h2>
+<p>We will simulate the motion of a charged particle under different electromagnetic field configurations using Python. The simulations will cover:</p>
+<ol>
+<li><strong>Circular Motion</strong>: Particle moving perpendicular to a uniform magnetic field.</li>
+</ol>
+<p><img alt="alt text" src="../image.png"/></p>
+<ol>
+<li><strong>Spiral Motion</strong>: Particle with an initial velocity component along the magnetic field.</li>
+</ol>
+<p><img alt="alt text" src="../image-1.png"/></p>
+<ol>
+<li><strong>E×B Drift</strong>: Particle in crossed electric and magnetic fields.</li>
+</ol>
+<p><img alt="alt text" src="../image-2.png"/></p>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><strong>Charge</strong>: <span class="arithmatex">\( q = 1\, \text{C} \)</span></li>
+<li><strong>Mass</strong>: <span class="arithmatex">\( m = 1\, \text{g} = 0.001\, \text{kg} \)</span></li>
+<li><strong>Time Span</strong>: <span class="arithmatex">\( t \in [0, 0.05]\, \text{s} \)</span></li>
+<li><strong>Time Steps</strong>: 1000</li>
+</ul>
+<hr/>
+<h2 id="python-code">Python Code</h2>
+<p>```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from scipy.integrate import solve_ivp</p>
+<h1 id="constants">Constants</h1>
+<p>q = 1.0          # charge [C]
+m = 0.001        # mass [kg]
+B = np.array([0, 0, 1])  # Magnetic field [T]
+E = np.array([0, 0, 0])  # Default: no electric field</p>
+<h1 id="lorentz-force-equation">Lorentz Force Equation</h1>
+<p>def lorentz_force(t, state, E, B):
+    r = state[0:3]
+    v = state[3:6]
+    a = (q/m) * (E + np.cross(v, B))
+    return np.concatenate((v, a))</p>
+<h1 id="plotting-function">Plotting function</h1>
+<p>def plot_trajectory(sol, title='Trajectory'):
+    fig = plt.figure(figsize=(10, 7))
+    ax = fig.add_subplot(111, projection='3d')
+    ax.plot(sol.y[0], sol.y[1], sol.y[2])
+    ax.set_title(title)
+    ax.set_xlabel('x [m]')
+    ax.set_ylabel('y [m]')
+    ax.set_zlabel('z [m]')
+    ax.grid(True)
+    plt.show()</p>
+<h1 id="time-settings">Time settings</h1>
+<p>t_span = (0, 0.05)
+t_eval = np.linspace(*t_span, 1000)</p>
+<h3 id="1-circular-trajectory-vx-0-vy-vz-0-b-field-only">1. Circular Trajectory (vx ≠ 0, vy = vz = 0), B field only</h3>
+<p>v0 = np.array([0, 1e3, 0])   # Initial velocity
+r0 = np.array([0, 0, 0])     # Initial position
+state0 = np.concatenate((r0, v0))
+sol1 = solve_ivp(lorentz_force, t_span, state0, t_eval=t_eval, args=(E, B))
+plot_trajectory(sol1, title='Circular Motion in Magnetic Field')</p>
+<h3 id="2-spiral-trajectory-add-vz">2. Spiral Trajectory (add vz)</h3>
+<p>v0 = np.array([0, 1e3, 500])  # z-component causes spiral
+state0 = np.concatenate((r0, v0))
+sol2 = solve_ivp(lorentz_force, t_span, state0, t_eval=t_eval, args=(E, B))
+plot_trajectory(sol2, title='Spiral Motion in Magnetic Field')</p>
+<h3 id="3-drift-in-e-x-b-field">3. Drift in E x B Field</h3>
+<p>E = np.array([1000, 0, 0])   # Electric field in x
+B = np.array([0, 0, 1])      # Magnetic field in z
+v0 = np.array([0, 1e3, 0])   # Perpendicular velocity
+state0 = np.concatenate((r0, v0))
+sol3 = solve_ivp(lorentz_force, t_span, state0, t_eval=t_eval, args=(E, B))
+plot_trajectory(sol3, title='E × B Drift')</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
