@@ -40,9 +40,9 @@ Escape velocity from a distance $r$ is:
 $$
 v_{\text{escape}} = \sqrt{\frac{2 G M}{r}}
 $$
- ![alt text](image-11.png)
+![alt text](image-13.png)
 
-![alt text](image-12.png)
+![alt text](image-14.png)
 
 ## Python Simulation
 
@@ -51,69 +51,73 @@ The following Python code numerically integrates the motion using the Runge-Kutt
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp
+from scipy.integrate import odeint
 
-# Constants
-G = 6.67430e-11  # gravitational constant, m^3/kg/s^2
-M = 5.972e24     # mass of Earth, kg
-R = 6.371e6      # radius of Earth, m
-rho = M / ((4/3) * np.pi * R**3)  # average density of Earth
+# === Constants ===
+G = 6.67430e-11       # Gravitational constant (m^3 kg^-1 s^-2)
+M = 5.972e24          # Earth mass (kg)
+R_earth = 6371e3      # Earth radius (m)
+mu = G * M            # Gravitational parameter (m^3 s^-2)
 
-def gravity_inside_earth(x, y):
-    r = np.sqrt(x**2 + y**2)
-    if r == 0:
-        return 0, 0
-    g = -G * (4/3) * np.pi * rho * r
-    return g * x / r, g * y / r
+# === Launch Parameters ===
+altitude = 800e3                      # Altitude above Earth's surface (m)
+r0 = R_earth + altitude               # Initial distance from Earth's center (m)
+x0, y0 = r0, 0                        # Launch from x-axis
+v0_list = np.arange(5, 13.5, 0.5) * 1e3  # Speeds: 5 to 13 km/s
 
-def trajectory(t, state):
+# Convert for plotting
+R_earth_km = R_earth / 1e3
+r0_km = r0 / 1e3
+
+# === Gravity equations ===
+def equations(state, t):
     x, y, vx, vy = state
-    gx, gy = gravity_inside_earth(x, y)
-    return [vx, vy, gx, gy]
+    r = np.sqrt(x**2 + y**2)
+    ax = -mu * x / r**3
+    ay = -mu * y / r**3
+    return [vx, vy, ax, ay]
 
-# Initial conditions
-def generate_initial_conditions(case=1):
-    if case == 1:
-        speeds = np.linspace(0, 8000, 6)  # m/s
-        pos = [R + 1e5, 0]
-    else:
-        speeds = np.linspace(1000, 11000, 11)
-        pos = [R + 1e5, 0]
-    return speeds, pos
+# === Time array ===
+t_max = 30000
+t = np.linspace(0, t_max, 10000)
 
-def simulate_trajectories(case=1):
-    speeds, pos = generate_initial_conditions(case)
-    t_span = (0, 20000)
-    t_eval = np.linspace(*t_span, 1000)
+# === Plot setup ===
+fig, ax = plt.subplots(figsize=(8, 8))
+earth = plt.Circle((0, 0), R_earth_km, color='blue', alpha=0.5, label='Earth')
+ax.add_patch(earth)
+ax.plot(0, 0, 'y*', label='Earth center')
 
-    fig, ax = plt.subplots(figsize=(8, 8))
-    ax.set_title(f'Trajectories in a Gravitational Field with Filled Earth')
-    ax.set_xlabel('x [m]')
-    ax.set_ylabel('y [m]')
-    ax.set_aspect('equal')
+colors = plt.cm.viridis(np.linspace(0, 1, len(v0_list)))
 
-    # Earth
-    earth = plt.Circle((0, 0), R, color='royalblue', alpha=0.5, label='Earth')
-    ax.add_artist(earth)
-    ax.plot(0, 0, marker='o', color='red', markersize=10, label='Center of Earth', markeredgecolor='black')
+# === Simulate and plot trajectories ===
+for i, v0 in enumerate(v0_list):
+    state0 = [x0, y0, 0, v0]  # Launch tangentially (along +y)
 
+    solution = odeint(equations, state0, t)
+    x_m = solution[:, 0]
+    y_m = solution[:, 1]
+    r_m = np.sqrt(x_m**2 + y_m**2)
 
-    for i, speed in enumerate(speeds):
-        vx, vy = 0, speed
-        sol = solve_ivp(trajectory, t_span, [pos[0], pos[1], vx, vy], t_eval=t_eval)
-        ax.plot(sol.y[0], sol.y[1], label=f'Trajectory {i+1}')
+    # If the projectile ever enters the Earth, skip the whole trajectory
+    if np.any(r_m < R_earth):
+        continue  # This one hit Earth, skip
 
-    ax.set_xlim(-1.1*R, 1.1*R * (3 if case == 2 else 1.1))
-    ax.set_ylim(-1.1*R, 1.1*R * (3 if case == 2 else 1.1))
-    ax.legend()
-    plt.grid(True)
-    plt.show()
+    # Otherwise, plot the full clean trajectory
+    x_km = x_m / 1e3
+    y_km = y_m / 1e3
+    ax.plot(x_km, y_km, color=colors[i], label=f'v₀ = {v0/1e3:.1f} km/s')
 
-# Case 1
-simulate_trajectories(case=1)
-
-# Case 2
-simulate_trajectories(case=2)
+# === Final plot formatting ===
+ax.set_xlim(-3 * r0_km, 3 * r0_km)
+ax.set_ylim(-3 * r0_km, 3 * r0_km)
+ax.set_xlabel('x (km)')
+ax.set_ylabel('y (km)')
+ax.set_title('Clean Orbital / Escape Trajectories (No Earth Impact)')
+ax.set_aspect('equal')
+ax.grid(True)
+ax.legend(fontsize=8, loc='upper right')
+plt.tight_layout()
+plt.show()
 ```
 # Colab #
 [Colab Link](https://colab.research.google.com/drive/1UPn6MBFrlmQp4cqLCaJ4XPxoa8Iq_RWj?usp=sharing)
