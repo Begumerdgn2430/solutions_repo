@@ -172,6 +172,49 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="circuit-analysis-exercise-exercise-title">🔌 Circuit Analysis Exercise: [Exercise Title]</h1>
+<h2 id="objective">Objective</h2>
+<p>Briefly describe the goal of the exercise. For example:
+- Analyze the behavior of an RC circuit over time.
+- Determine the current and voltage across components in an RLC circuit.</p>
+<h2 id="problem-statement">Problem Statement</h2>
+<p>Provide a detailed description of the circuit problem, including:
+- The type of circuit (e.g., series, parallel, RLC).
+- Given values (e.g., resistance, capacitance, inductance, voltage sources).
+- What needs to be calculated or analyzed.</p>
+<h2 id="circuit-diagram">Circuit Diagram</h2>
+<p>Include a schematic of the circuit. You can use tools like <a href="https://www.overleaf.com/learn/latex/Circuitikz_package">Circuitikz</a> for LaTeX or embed an image:</p>
+<p><img alt="Circuit Diagram" src="path_to_circuit_image.png"/></p>
+<h2 id="theoretical-background">Theoretical Background</h2>
+<p>Discuss the relevant theories and formulas:
+- Ohm's Law
+- Kirchhoff's Laws
+- Differential equations governing the circuit behavior</p>
+<h2 id="calculations">Calculations</h2>
+<p>Show step-by-step calculations:
+1. Apply Kirchhoff's Voltage and Current Laws.
+2. Solve the differential equations.
+3. Calculate the desired quantities (e.g., current, voltage, impedance).</p>
+<h2 id="simulation">Simulation</h2>
+<p>If applicable, include a simulation of the circuit using Python:</p>
+<p>```python
+import numpy as np
+import matplotlib.pyplot as plt</p>
+<h1 id="define-parameters">Define parameters</h1>
+<p>R = 1000  # Resistance in ohms
+C = 1e-6  # Capacitance in farads
+V0 = 5    # Initial voltage in volts</p>
+<h1 id="time-array">Time array</h1>
+<p>t = np.linspace(0, 0.01, 1000)</p>
+<h1 id="voltage-across-capacitor-over-time-in-an-rc-charging-circuit">Voltage across capacitor over time in an RC charging circuit</h1>
+<p>Vc = V0 * (1 - np.exp(-t / (R * C)))</p>
+<h1 id="plotting">Plotting</h1>
+<p>plt.plot(t, Vc)
+plt.title('Voltage Across Capacitor Over Time')
+plt.xlabel('Time (s)')
+plt.ylabel('Voltage (V)')
+plt.grid(True)
+plt.show()</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
