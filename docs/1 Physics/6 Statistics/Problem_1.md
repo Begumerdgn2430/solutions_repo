@@ -48,7 +48,7 @@ We explore the CLT using three distinct population distributions:
 | **Binomial**      | Discrete counts of successes in trials    | Varies (Symmetric if $p=0.5$) |
 
 ---
- ## Uniform Distribution
+## Uniform Distribution
 
   ![alt text](image.png)
 
