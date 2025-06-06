@@ -172,6 +172,201 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="exploring-the-central-limit-theorem-clt-through-simulation">Exploring the Central Limit Theorem (CLT) Through Simulation</h1>
+<h2 id="objective">Objective</h2>
+<p>To understand and visualize how the <strong>Central Limit Theorem</strong> (CLT) works in practice using simulation techniques on different types of population distributions.</p>
+<hr/>
+<h2 id="what-is-the-central-limit-theorem">What is the Central Limit Theorem?</h2>
+<p>The <strong>Central Limit Theorem (CLT)</strong> is a fundamental theorem in probability and statistics. It states:</p>
+<blockquote>
+<p>If you take sufficiently large random samples from any population with a finite mean (<span class="arithmatex">\(\mu\)</span>) and finite variance (<span class="arithmatex">\(\sigma^2\)</span>), the distribution of the sample means will approach a <strong>normal distribution</strong>, regardless of the shape of the population distribution.</p>
+</blockquote>
+<h3 id="mathematical-formulation">Mathematical Formulation</h3>
+<p>Let <span class="arithmatex">\(X_1, X_2, \dots, X_n\)</span> be independent and identically distributed random variables with:</p>
+<ul>
+<li>Mean: <span class="arithmatex">\(\mu\)</span></li>
+<li>Variance: <span class="arithmatex">\(\sigma^2\)</span></li>
+</ul>
+<p>Then the <strong>sample mean</strong>:</p>
+<div class="arithmatex">\[
+\bar{X}_n = \frac{1}{n} \sum_{i=1}^{n} X_i
+\]</div>
+<p>approaches a normal distribution:</p>
+<div class="arithmatex">\[
+\bar{X}_n \sim \mathcal{N} \left( \mu, \frac{\sigma^2}{n} \right)
+\]</div>
+<p>as <span class="arithmatex">\(n \rightarrow \infty\)</span>.</p>
+<hr/>
+<h2 id="distributions-used-in-this-simulation">Distributions Used in This Simulation</h2>
+<p>We explore the CLT using three distinct population distributions:</p>
+<table>
+<thead>
+<tr>
+<th>Distribution Type</th>
+<th>Description</th>
+<th>Shape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Uniform</strong></td>
+<td>Evenly distributed between [0, 1]</td>
+<td>Symmetric</td>
+</tr>
+<tr>
+<td><strong>Exponential</strong></td>
+<td>Decaying probability, positive values only</td>
+<td>Skewed (Right)</td>
+</tr>
+<tr>
+<td><strong>Binomial</strong></td>
+<td>Discrete counts of successes in trials</td>
+<td>Varies (Symmetric if <span class="arithmatex">\(p=0.5\)</span>)</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<p>## Uniform Distribution</p>
+<p><img alt="alt text" src="../image.png"/></p>
+<h2 id="exponential-distribution">Exponential Distribution</h2>
+<p><img alt="alt text" src="../image-1.png"/></p>
+<h2 id="binomial-distribution">Binomial Distribution</h2>
+<p><img alt="alt text" src="../image-2.png"/></p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set style for the plots
+sns.set(style="whitegrid")
+
+def simulate_sample_means(distribution_func, sample_sizes, num_samples=10000):
+    """
+    Simulates sample means for different sample sizes.
+
+    Parameters:
+        distribution_func: function that generates samples (e.g., np.random.uniform)
+        sample_sizes: list of sample sizes to test
+        num_samples: how many times to repeat sampling
+
+    Returns:
+        Dictionary mapping sample_size -&gt; list of sample means
+    """
+    results = {}
+    for n in sample_sizes:
+        sample_means = []
+        for _ in range(num_samples):
+            # Generate a sample from the specified distribution
+            sample = distribution_func(size=n)
+            # Calculate the mean of the sample
+            sample_mean = np.mean(sample)
+            # Store the sample mean
+            sample_means.append(sample_mean)
+        results[n] = sample_means
+    return results
+
+# Define the population distribution: Uniform between [0, 10]
+def generate_uniform(size):
+    return np.random.uniform(0, 10, size=size)
+
+# Define the sample sizes to simulate
+sample_sizes = [5, 10, 30, 50]
+
+# Simulate sample means for the uniform distribution
+uniform_data = simulate_sample_means(generate_uniform, sample_sizes)
+
+# Create a figure and subplots to display the histograms
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+
+# Plot histograms of the sample means for each sample size
+for ax, n in zip(axes.flat, sample_sizes):
+    sns.histplot(uniform_data[n], ax=ax, kde=True, stat="density", bins=30)
+    ax.set_title(f"Uniform - Sample Size {n}")
+
+# Adjust layout for better spacing
+plt.tight_layout()
+
+# Display the plot
+plt.show()
+</code></pre>
+<h2 id="simulation-process">Simulation Process</h2>
+<p>For each population distribution, we follow this procedure:</p>
+<ol>
+<li><strong>Generate a large population</strong> of size <span class="arithmatex">\(N = 100,\!000\)</span>.</li>
+<li><strong>Sample multiple times</strong> from this population using sample sizes:</li>
+<li><span class="arithmatex">\(n = 5, 10, 30, 50\)</span></li>
+<li><strong>Repeat each sampling 1000 times</strong> to create a distribution of sample means.</li>
+<li><strong>Plot histograms</strong> of these sample means to observe the distribution shape.</li>
+<li><strong>Compare results across sample sizes</strong> to see convergence to normality.</li>
+</ol>
+<hr/>
+<h2 id="what-we-expect-to-observe">What We Expect to Observe</h2>
+<ul>
+<li>For <strong>small sample sizes</strong>, the distribution of sample means may resemble the shape of the population.</li>
+<li>As the <strong>sample size increases</strong>, the distribution of sample means becomes <strong>more bell-shaped and symmetric</strong>.</li>
+<li>The <strong>spread</strong> (standard deviation) of the sample mean <strong>shrinks</strong> as sample size increases:</li>
+</ul>
+<div class="arithmatex">\[
+\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}
+\]</div>
+<hr/>
+<h2 id="key-definitions">Key Definitions</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Population</strong></td>
+<td>The entire dataset from which samples are drawn</td>
+</tr>
+<tr>
+<td><strong>Sample</strong></td>
+<td>A subset of the population</td>
+</tr>
+<tr>
+<td><strong>Sample Mean</strong></td>
+<td>The average value of a sample</td>
+</tr>
+<tr>
+<td><strong>Sampling Distribution</strong></td>
+<td>Distribution of sample means over many samples of the same size</td>
+</tr>
+<tr>
+<td><strong>Standard Error</strong></td>
+<td>Standard deviation of the sample mean, <span class="arithmatex">\(\sigma / \sqrt{n}\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="why-clt-is-so-important">Why CLT Is So Important</h2>
+<ul>
+<li><strong>Foundational for inferential statistics</strong>: It allows us to use sample statistics to infer population parameters.</li>
+<li><strong>Enables confidence intervals</strong> and <strong>hypothesis testing</strong>.</li>
+<li><strong>Provides justification</strong> for using the normal distribution in many practical applications, even when data isn't normal.</li>
+</ul>
+<hr/>
+<h2 id="real-world-applications">Real-World Applications</h2>
+<h3 id="manufacturing-quality-control">Manufacturing &amp; Quality Control</h3>
+<p>Monitor average product measurements (e.g., bolt diameter) to detect process issues.</p>
+<h3 id="business-analytics">Business Analytics</h3>
+<p>Use sample survey data to estimate market preferences.</p>
+<h3 id="finance">Finance</h3>
+<p>Model portfolio returns — CLT helps justify assumptions of normality in asset returns.</p>
+<h3 id="healthcare">Healthcare</h3>
+<p>Analyze average response times or treatment outcomes from clinical trials.</p>
+<hr/>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>The CLT shows how <strong>random variation averages out</strong> over many samples.</li>
+<li>Even for <strong>non-normal populations</strong>, the <strong>mean of many samples becomes normal</strong>.</li>
+<li>This allows reliable estimation of population parameters using normal-based techniques.</li>
+</ul>
+<hr/>
+<h3 id="colab">Colab</h3>
+<p>https://colab.research.google.com/drive/1zb1_0HUP0-2ykWkjjA-NkAFgA_OBmLtH?usp=sharing</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
