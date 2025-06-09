@@ -253,4 +253,4 @@ plt.show()
 - Geometry and Probability — D. Feller, *An Introduction to Probability Theory*
 
 ## Colab
-[Colab Link]https://colab.research.google.com/drive/1Uuri4PqgJ21uW_h7lJ8sVxfgRmS-moN9?usp=sharing
+[Colab Link](https://colab.research.google.com/drive/1Uuri4PqgJ21uW_h7lJ8sVxfgRmS-moN9?usp=sharing)
