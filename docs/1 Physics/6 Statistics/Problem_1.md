@@ -188,5 +188,4 @@ Analyze average response times or treatment outcomes from clinical trials.
 
 ---
 ### Colab
-https://colab.research.google.com/drive/1zb1_0HUP0-2ykWkjjA-NkAFgA_OBmLtH?usp=sharing
-
+[Colab Link](https://colab.research.google.com/drive/1zb1_0HUP0-2ykWkjjA-NkAFgA_OBmLtH?usp=sharing)
